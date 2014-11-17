@@ -1,9 +1,23 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure("2") do |config|
-  config.omnibus.chef_version = :latest
+Vagrant.require_version '>= 1.5.2'
+Vagrant.configure('2') do |config|
+  config.vm.hostname = 'chef-huginn'
+  #config.vm.box = 'chef/ubuntu-14.04'
+  #config.vm.network :private_network, ip: '10.2.2.20'
+  config.vm.box = "precise64-cloud.2013-06-25"
+  config.vm.box_url = "https://s3.amazonaws.com/kabam-vagrant-boxes/precise64-cloud.2013-06-25.box"
 
+  config.omnibus.chef_version = :latest
+  config.berkshelf.enabled = true
+
+  config.vm.provider :virtualbox do |vb|
+    vb.cpus = 2
+    vb.memory = 2048
+  end
+
+=begin
   config.vm.provision :chef_solo do |chef|
     chef.roles_path = "roles"
     chef.cookbooks_path = ["cookbooks", "site-cookbooks"]
@@ -17,24 +31,17 @@ Vagrant.configure("2") do |config|
     override.vm.box = "hashicorp/precise64"
     override.vm.network :forwarded_port, host: 3000, guest: 3000
   end
+=end
 
-  config.vm.provider :parallels do |prl, override|
-    override.vm.box = "parallels/ubuntu-12.04"
-  end
+  config.vm.provision :chef_solo do |chef|
+    #chef.log_level = :debug
+    chef.json = {
 
-  config.vm.provider :aws do |aws, override|
-    aws.ami = ENV['AWS_AMI'] || "ami-828675f5"
-    aws.region = ENV['AWS_REGION'] || "eu-west-1"
-    aws.instance_type = "t1.micro"
+    }
 
-    override.vm.box = "dummy"
-    override.vm.box_url = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
-    override.ssh.private_key_path = ENV["AWS_SSH_PRIVKEY"]
-    override.ssh.username = ENV['AWS_SSH_USER'] || "ubuntu"
-
-    aws.access_key_id = ENV["AWS_ACCESS_KEY_ID"]
-    aws.secret_access_key = ENV["AWS_SECRET_ACCESS_KEY"]
-    aws.keypair_name = ENV["AWS_KEYPAIR_NAME"]
-    aws.security_groups = [ ENV["AWS_SECURITY_GROUP"] ]
+    chef.run_list = [
+      'recipe[huginn::default]',
+    ]
+    chef.custom_config_path = '.vagrant-solo.rb'
   end
 end

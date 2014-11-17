@@ -1,0 +1,17 @@
+DEPENDENCIES
+  huginn
+    path: .
+    metadata: true
+
+GRAPH
+  apt (2.6.0)
+  build-essential (2.1.2)
+  huginn (0.1.0)
+    apt (>= 0.0.0)
+    build-essential (>= 0.0.0)
+    mysql (>= 0.0.0)
+  mysql (5.6.1)
+    yum-mysql-community (>= 0.0.0)
+  yum (3.4.1)
+  yum-mysql-community (0.1.10)
+    yum (>= 3.0)
