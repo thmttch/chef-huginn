@@ -10,6 +10,7 @@ depends 'apt'
 depends 'build-essential'
 
 depends 'rbenv'
+depends 'ruby_build'
 
 depends 'mysql'
 depends 'database'

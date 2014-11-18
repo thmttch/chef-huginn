@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd <%= @options[:install_dir] %>
+
+exec 2>&1
+exec foreman start
