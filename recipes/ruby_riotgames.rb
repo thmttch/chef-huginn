@@ -27,7 +27,7 @@ rbenv_execute 'bundle install and exec' do
     bundle exec rake db:migrate
     bundle exec rake db:seed
 
-    bundle binstubs foreman
+    #bundle binstubs foreman
   EOS
   cwd install_dir
   ruby_version ruby_version

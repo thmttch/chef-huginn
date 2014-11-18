@@ -1,6 +1,7 @@
 default.huginn = {
   user: 'huginn',
   group: 'huginn',
+  home: '/home/huginn',
 
   install_dir: '/home/huginn/huginn',
   #repo_url: 'git://github.com/thmttch/huginn.git',

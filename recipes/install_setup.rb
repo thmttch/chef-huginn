@@ -41,12 +41,15 @@ end
 node.force_default.authorization.sudo.users = [ user ]
 node.force_default.authorization.sudo.groups = [ group ]
 node.force_default.authorization.sudo.passwordless = true
+=begin
 node.force_default.authorization.sudo.sudoers_defaults = [
   'env_reset',
   'env_keep = ""',
+  'env_keep += "HOME"',
   'env_keep += "RBENV_ROOT"',
   'secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"',
 ]
+=end
 
 # setup: db
 

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export HOME=<%= @options[:home] %>
+
 cd <%= @options[:install_dir] %>
 
 exec 2>&1

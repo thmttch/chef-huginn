@@ -1,4 +1,5 @@
 user = node.huginn.user
+home = node.huginn.home
 install_dir = node.huginn.install_dir
 ruby_version = node.huginn.ruby_version
 
@@ -10,9 +11,11 @@ runit_service 'huginn' do
     install_dir: install_dir,
     user: user,
     foreman_path: foreman_path,
+    home: home,
   })
   env({
     'RBENV_ROOT' => '/opt/rbenv',
+    'HOME' => home,
   })
   default_logger true
   sv_verbose true
