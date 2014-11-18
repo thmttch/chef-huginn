@@ -13,13 +13,13 @@ package 'git'
 # setup: users and permissions
 
 user user do
-  action :create
   system true
   home "/home/huginn"
   password "$6$ZwO6b.6tij$SMa8UIwtESGDxB37NwHsct.gJfXWmmflNbH.oypwJ9y0KkzMkCdw7D14iK7GX9C4CWSEcpGOFUow7p01rQFu5."
   supports :manage_home => true
-  gid "sudo"
-  shell "/bin/bash"
+  #gid "sudo"
+  #shell "/bin/bash"
+  action :create
 end
 
 group group do
@@ -27,6 +27,7 @@ group group do
   action :create
 end
 
+=begin
 bash "Setting huginn user with NOPASSWD option" do
   cwd "/etc/sudoers.d"
   code <<-EOH
@@ -35,6 +36,17 @@ bash "Setting huginn user with NOPASSWD option" do
     echo "huginn ALL=(ALL) NOPASSWD:ALL" >> huginn
   EOH
 end
+=end
+
+node.force_default.authorization.sudo.users = [ user ]
+node.force_default.authorization.sudo.groups = [ group ]
+node.force_default.authorization.sudo.passwordless = true
+node.force_default.authorization.sudo.sudoers_defaults = [
+  'env_reset',
+  'env_keep = ""',
+  'env_keep += "RBENV_ROOT"',
+  'secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"',
+]
 
 # setup: db
 

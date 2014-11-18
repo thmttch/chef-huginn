@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd <%= @options[:install_dir] %>
+
+exec 2>&1
+exec \
+    /opt/rbenv/shims/bundle exec foreman start
+  #chpst -u <%= @options[:user] %> \
+    #<%= @options[:foreman_path] %> start

@@ -27,23 +27,3 @@ template "#{install_dir}/.env" do
     db_pass: db_pass,
   })
 end
-
-include_recipe 'runit::default'
-runit_service 'huginn' do
-  options({
-    install_dir: install_dir,
-  })
-  default_logger true
-  action :nothing
-end
-
-=begin
-bash "huginn has been installed and will start in a minute" do
-  user "huginn"
-  cwd "/home/huginn/huginn"
-  code <<-EOH
-    sudo nohup foreman start &
-  EOH
-  action :nothing
-end
-=end
