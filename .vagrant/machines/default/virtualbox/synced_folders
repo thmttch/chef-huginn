@@ -1,1 +1,0 @@
-{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/mchu/ww/chef-huginn","disabled":false},"v-csc-1":{"id":"v-csc-1","guestpath":"/tmp/vagrant-chef-3/chef-solo-1/cookbooks","hostpath":"/Users/mchu/.berkshelf/default/vagrant/berkshelf-20141118-57168-1m30jq2-default","disabled":false}}}
